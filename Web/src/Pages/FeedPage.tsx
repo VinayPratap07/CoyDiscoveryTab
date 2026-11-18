@@ -1,4 +1,3 @@
-import React from "react";
 import { useFeedPage } from "../hooks/useFeedPage";
 import FeedHeader from "../Component/FeedHeader";
 import SwipeCard from "../Component/SwipeCard";
@@ -6,7 +5,7 @@ import FeedEmptyState from "../Component/FeedEmptyState";
 import FeedControls from "../Component/FeedControls";
 import MatchModal from "../Component/MatchModal";
 
-const FeedPage: React.FC = () => {
+function FeedPage() {
   const feed = useFeedPage();
 
   return (
@@ -29,7 +28,6 @@ const FeedPage: React.FC = () => {
           ) : (
             <FeedEmptyState
               isLoading={feed.isLoading}
-              history={feed.history}
               onReload={feed.handleReload}
             />
           )}
@@ -50,6 +48,6 @@ const FeedPage: React.FC = () => {
       />
     </div>
   );
-};
+}
 
 export default FeedPage;

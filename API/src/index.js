@@ -6,7 +6,7 @@ const { mockMiddleware } = require("./Middleware/User_Middleware");
 
 //Routes
 const SwipeRoutes = require("./Routes/Swipe_Routes");
-const ProfileRoutes = require("./Routes/Profile_Routes");
+const ProfileRoutes = require("./Routes/Feed_Routes");
 const MatchRoutes = require("./Routes/Match_Routes");
 
 const app = express();

@@ -7,7 +7,6 @@ async function getMatches(req, res) {
     const [matches] = await pool.query(
       `SELECT
           m.match_id,
-          m.createdAt AS matchedAt,
           u.user_id,
           u.name,
           u.photoUrl

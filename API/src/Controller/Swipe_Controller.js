@@ -87,16 +87,6 @@ async function swipeProfile(req, res) {
            VALUES (?, ?)`,
           [userOneId, userTwoId],
         );
-
-        const [matches] = await connection.query(
-          `SELECT match_id
-           FROM matches
-           WHERE userOneId = ?
-           AND userTwoId = ?`,
-          [userOneId, userTwoId],
-        );
-
-        matchId = matches[0].match_id;
       }
     }
 
@@ -110,7 +100,6 @@ async function swipeProfile(req, res) {
           ? "Profile liked successfully"
           : "Profile passed successfully",
       isMatch,
-      matchId,
     });
   } catch (error) {
     await connection.rollback();

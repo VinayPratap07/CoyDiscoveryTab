@@ -6,7 +6,6 @@ import type {
   SwipeAction,
   SwipeApiResponse,
   SwipePayload,
-  SwipeRecord,
 } from "../Types/FeedType";
 import type { MatchedUser } from "../Component/MatchModal";
 import { getFeed, sendSwipeAction } from "../Service/api";
@@ -17,7 +16,6 @@ export const useFeedPage = () => {
   const queryClient = useQueryClient();
 
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [history, setHistory] = useState<SwipeRecord[]>([]);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [exitAction, setExitAction] = useState<SwipeAction | null>(null);
@@ -77,8 +75,6 @@ export const useFeedPage = () => {
         },
         profile,
       });
-
-      setHistory((prev) => [...prev, { userId: profile.user_id, action }]);
 
       setTimeout(async () => {
         setExitAction(null);

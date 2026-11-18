@@ -1,61 +1,50 @@
-import React from "react";
 import { FiHome, FiCompass, FiHeart } from "react-icons/fi";
 import { NavLink, Link } from "react-router";
+import type { NavItem } from "../Types/NavbarTypes";
 
-export type NavTab = "home" | "discover" | "matches";
-
-interface NavItem {
-  id: NavTab;
-  label: string;
-  to: string;
-  end?: boolean;
-  icon: (isActive: boolean) => React.ReactNode;
-  badgeCount?: number;
-}
+const navItems: NavItem[] = [
+  {
+    id: "home",
+    label: "Home",
+    to: "/",
+    end: true,
+    icon: (isActive) => (
+      <FiHome
+        className={`w-6 h-6 md:w-4 md:h-4 transition-transform ${
+          isActive ? "stroke-[2.75] scale-105 md:scale-100" : "stroke-[2.25]"
+        }`}
+      />
+    ),
+  },
+  {
+    id: "discover",
+    label: "Discover",
+    to: "/discover",
+    icon: (isActive) => (
+      <FiCompass
+        className={`w-6 h-6 md:w-4 md:h-4 transition-transform ${
+          isActive ? "stroke-[2.75] scale-105 md:scale-100" : "stroke-[2.25]"
+        }`}
+      />
+    ),
+  },
+  {
+    id: "matches",
+    label: "Matches",
+    to: "/matches",
+    icon: (isActive) => (
+      <FiHeart
+        className={`w-6 h-6 md:w-4 md:h-4 transition-transform ${
+          isActive
+            ? "stroke-[2.5] fill-[#FF3B7F] md:fill-[#141118] scale-105 md:scale-100"
+            : "stroke-[2.25]"
+        }`}
+      />
+    ),
+  },
+];
 
 function Navbar() {
-  const navItems: NavItem[] = [
-    {
-      id: "home",
-      label: "Home",
-      to: "/",
-      end: true,
-      icon: (isActive) => (
-        <FiHome
-          className={`w-6 h-6 md:w-4 md:h-4 transition-transform ${
-            isActive ? "stroke-[2.75] scale-105 md:scale-100" : "stroke-[2.25]"
-          }`}
-        />
-      ),
-    },
-    {
-      id: "discover",
-      label: "Discover",
-      to: "/discover",
-      icon: (isActive) => (
-        <FiCompass
-          className={`w-6 h-6 md:w-4 md:h-4 transition-transform ${
-            isActive ? "stroke-[2.75] scale-105 md:scale-100" : "stroke-[2.25]"
-          }`}
-        />
-      ),
-    },
-    {
-      id: "matches",
-      label: "Matches",
-      to: "/matches",
-      icon: (isActive) => (
-        <FiHeart
-          className={`w-6 h-6 md:w-4 md:h-4 transition-transform ${
-            isActive
-              ? "stroke-[2.5] fill-[#FF3B7F] md:fill-[#141118] scale-105 md:scale-100"
-              : "stroke-[2.25]"
-          }`}
-        />
-      ),
-    },
-  ];
-
   return (
     <header className="w-full bg-white text-[#141118] border-t-2 md:border-t-0 md:border-b-2 border-[#141118] pb-[env(safe-area-inset-bottom)] md:pb-0 z-50 select-none shrink-0">
       <nav

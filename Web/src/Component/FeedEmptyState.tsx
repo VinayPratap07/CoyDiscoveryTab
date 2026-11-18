@@ -1,13 +1,11 @@
 import { FiSliders } from "react-icons/fi";
-import type { SwipeRecord } from "../Types/FeedType";
 
 interface FeedEmptyStateProps {
   isLoading: boolean;
-  history: SwipeRecord[];
   onReload: () => void;
 }
 
-function FeedEmptyState({ isLoading, history, onReload }: FeedEmptyStateProps) {
+function FeedEmptyState({ isLoading, onReload }: FeedEmptyStateProps) {
   if (isLoading) {
     return (
       <div className="w-full h-full rounded-[28px] bg-white border-2 border-[#141118] shadow-[6px_6px_0px_#141118] overflow-hidden flex flex-col animate-pulse">
@@ -21,9 +19,6 @@ function FeedEmptyState({ isLoading, history, onReload }: FeedEmptyStateProps) {
     );
   }
 
-  const likedCount = history.filter((h) => h.action === "LIKE").length;
-  const passedCount = history.filter((h) => h.action === "PASS").length;
-
   return (
     <div className="w-full h-full rounded-[28px] bg-[#FFFDF7] border-2 border-[#141118] shadow-[6px_6px_0px_#141118] p-6 flex flex-col items-center justify-center text-center gap-4">
       <div className="w-14 h-14 rounded-full bg-[#FFE259] border-2 border-[#141118] shadow-[3px_3px_0px_#141118] flex items-center justify-center text-[#141118]">
@@ -34,9 +29,9 @@ function FeedEmptyState({ isLoading, history, onReload }: FeedEmptyStateProps) {
           No more profiles
         </h3>
         <p className="text-sm font-medium text-zinc-600 mt-1">
-          Liked: <span className="font-bold text-[#141118]">{likedCount}</span>{" "}
-          · Passed:{" "}
-          <span className="font-bold text-[#141118]">{passedCount}</span>
+          <span className="font-bold text-[#141118]">
+            No more profiles left
+          </span>{" "}
         </p>
       </div>
       <button

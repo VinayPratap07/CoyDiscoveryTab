@@ -22,15 +22,15 @@ async function getProfiles(req, res) {
                 AND s.swipedId = u.user_id
             )
             ORDER BY u.createdAt DESC
-            LIMIT 6`,
+            LIMIT 10`,
       [userId, userId],
     );
 
-    const hasMore = profiles.length > 5;
+    const hasMore = profiles.length > 9;
 
     return res.status(200).json({
       success: true,
-      profiles: profiles.slice(0, 5),
+      profiles: profiles.slice(0, 9),
       hasMore,
     });
   } catch (error) {
