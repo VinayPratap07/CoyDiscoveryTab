@@ -1,5 +1,25 @@
+import { Outlet } from "react-router";
+import Navbar from "./Component/NavBar";
+
 function App() {
-  return <div>App</div>;
+  return (
+    <div className="h-[100dvh] flex flex-col bg-white overflow-hidden">
+      {/* Top on PC */}
+      <div className="hidden md:block">
+        <Navbar matchesCount={3} />
+      </div>
+
+      {/* Routed Page Content */}
+      <main className="flex-1 min-h-0">
+        <Outlet />
+      </main>
+
+      {/* Bottom on Mobile */}
+      <div className="md:hidden">
+        <Navbar matchesCount={3} />
+      </div>
+    </div>
+  );
 }
 
 export default App;
