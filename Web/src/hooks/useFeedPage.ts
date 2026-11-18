@@ -51,6 +51,7 @@ export const useFeedPage = () => {
         });
 
         queryClient.invalidateQueries({ queryKey: ["matches"] });
+        queryClient.invalidateQueries({ queryKey: ["feed-profiles"] });
       }
     },
   });
