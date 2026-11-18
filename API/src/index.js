@@ -1,7 +1,12 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const { connectDB, pool } = require("./Database/Connection");
+const { connectDB } = require("./Database/Connection");
+
+//Routes
+const SwipeRoutes = require("./Routes/Swipe_Routes");
+const ProfileRoutes = require("./Routes/Profile_Routes");
+const { mockMiddleware } = require("./Middleware/User_Middleware");
 
 const app = express();
 const PORT = process.env.PORT;
@@ -19,12 +24,11 @@ const corsOptions = {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors(corsOptions));
+app.use(mockMiddleware);
 
 //Routes
-app.use("/", async (req, res) => {
-  const [rows] = await pool.query("select * from users;");
-  return res.status(200).json({ profiles: rows });
-});
+app.use("/profile", ProfileRoutes);
+app.use("/", SwipeRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server started at PORT: ${PORT}`);
