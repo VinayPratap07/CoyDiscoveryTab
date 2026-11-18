@@ -98,7 +98,6 @@ Privacy is a core requirement of the application.
 | Express.js              | REST API development                |
 | MySQL                   | Relational database                 |
 | Docker & Docker Compose | Running the MySQL database          |
-| Vite                    | Frontend development server         |
 | npm                     | Package management                  |
 
 ---
@@ -159,13 +158,12 @@ Coy_Assignment/
 
 - **Controller:** Handles incoming requests and application business logic.
 - **Database:** Manages the MySQL database connection and database operations.
-- **Middleware:** Handles request processing and validation.
+- **Middleware:** A mock middleware for current user.
 - **Routes:** Defines and maps API endpoints to their respective controllers.
 - **index.js:** Backend application entry point.
 
 ### Frontend (Web)
 
-- **assets:** Static assets used throughout the application.
 - **Component:** Reusable UI components such as profile cards and match components.
 - **hooks:** Custom React hooks for reusable application logic.
 - **Pages:** Application pages, including Home, Discover, and Matches.
@@ -196,18 +194,18 @@ Returns profiles that the logged-in user has not previously swiped on.
 
 ```json
 {
-  "profiles": [
-    {
-      "id": 1,
-      "name": "Rahul",
-      "age": 23,
-      "photo": "profile-image-url",
-      "bio": "Love travelling and photography",
-      "city": "Delhi",
-      "interests": ["Music", "Travel", "Movies"]
-    }
-  ]
-}
+    "user_id": "93014a12-e35e-11f1-bc24-2a30f3d0139a",
+    "name": "Shreya Pillai",
+    "photoUrl": "https://randomuser.me/api/portraits/women/30.jpg",
+    "bio": "Food blogger and amateur photographer.",
+    "city": "Kochi",
+    "college": "Mahatma Gandhi University",
+    "interests": [
+        "Food",
+        "Photography",
+        "Travel"
+    ]
+},
 ```
 
 ### 2. Record a Swipe
@@ -220,47 +218,24 @@ Records the user's Like or Pass action on a profile and determines whether a mut
 
 ```json
 {
-  "profileId": 1,
-  "action": "like"
+  "swipedId": "3a5df0b2-e344-11f1-a957-4a7be110ae05",
+  "action": "LIKE"
 }
 ```
 
 Supported actions:
 
-- `like`
-- `pass`
+- `LIKE`
+- `PASS`
 
 **Functionality:**
 
 - Validates the target profile and swipe action.
 - Prevents duplicate swipe actions.
 - Persists the swipe in the database.
-- Checks for an existing reciprocal like when the action is `like`.
+- Checks for an existing reciprocal like when the action is `LIKE`.
 - Creates a match if both users have liked each other.
 - Returns the matching status to the frontend.
-
-**Example Response – Match Created:**
-
-```json
-{
-  "success": true,
-  "matched": true,
-  "match": {
-    "id": 1,
-    "profileId": 1,
-    "name": "Rahul"
-  }
-}
-```
-
-**Example Response – No Match:**
-
-```json
-{
-  "success": true,
-  "matched": false
-}
-```
 
 ### 3. Get Matches
 
@@ -278,18 +253,18 @@ Returns all mutual matches belonging to the logged-in user.
 
 ```json
 {
+  "success": true,
+  "count": 1,
   "matches": [
     {
-      "id": 1,
-      "name": "Rahul",
-      "age": 23,
-      "photo": "profile-image-url"
+      "match_id": "7fa4cfcd-e35f-11f1-bc24-2a30f3d0139a",
+      "user_id": "93014927-e35e-11f1-bc24-2a30f3d0139a",
+      "name": "Yash Thakur",
+      "photoUrl": "https://randomuser.me/api/portraits/men/29.jpg"
     }
   ]
 }
 ```
-
-> Note: Response examples illustrate the API contract. Adjust field names and response wrappers if the implementation differs.
 
 ---
 
@@ -322,7 +297,7 @@ Make sure the following are installed:
 ### 1. Clone the Repository
 
 ```bash
-git clone <YOUR_GITHUB_REPOSITORY_URL>
+git clone https://github.com/VinayPratap07/CoyDiscoveryTab
 
 cd Coy_Assignment
 ```
@@ -417,25 +392,44 @@ This stops and removes the database container. The database volume is retained i
 
 This section contains two proposed core features based on exploring the existing Coy application.
 
-### Feature 1: [Your Feature Name]
+### Feature 1: Anonymous Chat
 
 **Description:**
 
-[Describe the proposed feature and how it would work.]
+Introduce an anonymous chat feature that allows users to communicate with someone they are interested in without revealing their identity. Once a user sends a crush, they can initiate an anonymous conversation with that person, allowing both individuals to interact without knowing who is on the other side.
+
+The conversation would remain anonymous unless the sender chooses to reveal their identity or both users agree to reveal it.
 
 **Why is this feature required?**
 
-[Explain the problem it solves, why users need it, and how it improves the existing Coy experience.]
+One of the biggest barriers to expressing romantic interest is the fear of rejection or awkwardness. Users might hesitate to interact with someone they like because they are worried about revealing their identity.
 
-### Feature 2: [Your Feature Name]
+Anonymous chat would help eliminate this hesitation by providing a comfortable, low-pressure environment where users can get to know each other before deciding whether to reveal themselves.
+
+It would also make Coy more interactive and engaging by encouraging conversations rather than limiting the experience to simply sending and receiving crushes.
+
+### Feature 2: Anonymous Sender Profile
 
 **Description:**
 
-[Describe the proposed feature and how it would work.]
+Allow users sending a crush to create a basic anonymous profile that the recipient can view. Instead of receiving only a notification that someone has a crush on them, the recipient would also get access to a small profile containing information provided by the sender.
+
+The anonymous profile could include:
+
+- Anonymous Hint: A clue about who the sender might be, such as "We attend the same college" or "We have met at a college event."
+- Personal Message: A short message expressing something they want the recipient to know.
+- Question: A question to spark curiosity or encourage the recipient to respond.
+- Short Bio: A brief introduction describing their personality, interests, or hobbies without revealing their identity.
+
+The sender's actual identity would remain hidden, allowing the recipient to learn a little about their admirer without knowing exactly who they are.
 
 **Why is this feature required?**
 
-[Explain the problem it solves, why users need it, and how it improves the existing Coy experience.]
+Currently, simply knowing that someone has a crush on you might not provide enough information to make the experience engaging or encourage further interaction.
+
+An anonymous profile would add a personal touch to the experience and create curiosity about the person behind the crush. Instead of receiving just an anonymous notification, recipients would have clues, messages, or questions that could help them connect with their admirer.
+
+This would make sending and receiving crushes more interactive, give senders a way to express their personality, and encourage recipients to engage with the platform to discover who their admirer might be.
 
 ---
 
@@ -447,7 +441,7 @@ This section contains two proposed core features based on exploring the existing
 
 **Part B:** Development of a standalone swipe-based Discover application.
 
-**Repository:** [YOUR GITHUB REPOSITORY URL]
+**Repository:** https://github.com/VinayPratap07/CoyDiscoveryTab
 
 ---
 
