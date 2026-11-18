@@ -28,7 +28,7 @@ app.use(cors(corsOptions));
 app.use(mockMiddleware);
 
 //Routes
-app.use("/profile", ProfileRoutes);
+app.use("/feed", ProfileRoutes);
 app.use("/swipe", SwipeRoutes);
 app.use("/matches", MatchRoutes);
 

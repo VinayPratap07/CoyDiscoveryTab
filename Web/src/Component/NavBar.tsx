@@ -13,11 +13,7 @@ interface NavItem {
   badgeCount?: number;
 }
 
-interface NavbarProps {
-  matchesCount?: number;
-}
-
-export const Navbar: React.FC<NavbarProps> = ({ matchesCount = 0 }) => {
+function Navbar() {
   const navItems: NavItem[] = [
     {
       id: "home",
@@ -57,7 +53,6 @@ export const Navbar: React.FC<NavbarProps> = ({ matchesCount = 0 }) => {
           }`}
         />
       ),
-      badgeCount: matchesCount,
     },
   ];
 
@@ -147,6 +142,6 @@ export const Navbar: React.FC<NavbarProps> = ({ matchesCount = 0 }) => {
       </nav>
     </header>
   );
-};
+}
 
 export default Navbar;

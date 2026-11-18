@@ -10,11 +10,7 @@ async function getMatches(req, res) {
           m.createdAt AS matchedAt,
           u.user_id,
           u.name,
-          u.photoUrl,
-          u.bio,
-          u.city,
-          u.college,
-          u.interests
+          u.photoUrl
        FROM matches m
        JOIN users u
          ON u.user_id = CASE

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { FiHeart, FiX } from "react-icons/fi";
 import { useNavigate } from "react-router";
 
@@ -16,13 +16,13 @@ interface MatchModalProps {
   onViewMatches?: () => void;
 }
 
-export const MatchModal: React.FC<MatchModalProps> = ({
+function MatchModal({
   isOpen,
   matchedUser,
-  currentUserPhotoUrl = "https://i.pravatar.cc/400?img=12",
+  currentUserPhotoUrl,
   onClose,
   onViewMatches,
-}) => {
+}: MatchModalProps) {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -126,6 +126,6 @@ export const MatchModal: React.FC<MatchModalProps> = ({
       </div>
     </div>
   );
-};
+}
 
 export default MatchModal;

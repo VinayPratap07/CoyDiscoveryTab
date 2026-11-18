@@ -6,7 +6,7 @@ function App() {
     <div className="h-[100dvh] flex flex-col bg-white overflow-hidden">
       {/* Top on PC */}
       <div className="hidden md:block">
-        <Navbar matchesCount={3} />
+        <Navbar />
       </div>
 
       {/* Routed Page Content */}
@@ -16,7 +16,7 @@ function App() {
 
       {/* Bottom on Mobile */}
       <div className="md:hidden">
-        <Navbar matchesCount={3} />
+        <Navbar />
       </div>
     </div>
   );
